@@ -5,63 +5,79 @@
 LibroCalificaciones::LibroCalificaciones() {
 }
 
-LibroCalificaciones::LibroCalificaciones(const std::string& nombreCurso, int calificaciones[][EXAMENES]) {
-	setNombreCurso(nombreCurso);
+LibroCalificaciones::LibroCalificaciones(const std::string& nombreCurso, int arregloCalificaciones[ESTUDIANTES][EXAMENES]) {
+    setNombreCurso(nombreCurso);
 
-	for (int est = 0; est < ESTUDIANTES; est++) {
-		for (int ex = 0; ex < EXAMENES; ex++) {
+    for (int est = 0; est < ESTUDIANTES; est++) {
+        for (int ex = 0; ex < EXAMENES; ex++) {
 
-			calificaciones[est][ex] = calificaciones[est][ex];
-		}
-	}
+            calificaciones[est][ex] = arregloCalificaciones[est][ex];
+        }
+    }
 }
 
 int LibroCalificaciones::obtenerNotaMinima() {
-	int notaMinima = 0;
-	for (int estudiantes = 0; estudiantes < ESTUDIANTES; estudiantes++) {
-		for (int examenes = 0; examenes < EXAMENES; examenes++) {
-			if (calificaciones[estudiantes][examenes]) {
-				notaMinima = calificaciones[estudiantes][examenes];
-			}
-		}
-	}
+    int notaMinima = 100;
+    for (int est = 0; est < ESTUDIANTES; est++) {
+        for (int ex = 0; ex < EXAMENES; ex++) {
+            if (calificaciones[est][ex] < notaMinima) {
+                notaMinima = calificaciones[est][ex];
+            }
+        }
+    }
 
-	return notaMinima;
+    return notaMinima;
 }
 
 int LibroCalificaciones::obtenerNotaMaxima() {
-	int notaMaxima = 0;
-	for (int estudiantes = 0; estudiantes < ESTUDIANTES; estudiantes++) {
-		for (int examenes = 0; examenes < EXAMENES; examenes++) {
-			if (calificaciones[estudiantes][examenes]) {
-				notaMaxima = calificaciones[estudiantes][examenes];
-			}
-		}
-		return notaMaxima;
-	}
+    int notaMaxima = 0;
+    for (int est = 0; est < ESTUDIANTES; est++) {
+        for (int ex = 0; ex < EXAMENES; ex++) {
+            if (calificaciones[est][ex] > notaMaxima) {
+                notaMaxima = calificaciones[est][ex];
+            }
+        }
+    }
+    return notaMaxima;
 }
 
-double LibroCalificaciones::ObtenerPromedio(const int[], const int) {
-	double suma = 0;
+double LibroCalificaciones::ObtenerPromedio(const int est, const int examen) {
+    float promedio = 0;
+    float suma = 0;
 
-	for (int i = 0; i <= EXAMENES; i++) {
-		suma += i;
-	}
+    for (int ex = 0; ex < examen; ex++) {
+        suma = suma + calificaciones[est][ex];
 
-	return suma / (EXAMENES);
+    }
+    promedio = suma / 3;
+    return promedio;
 }
 
 std::string LibroCalificaciones::obtenerReporteNotas() {
-	return std::string();
+    std::string reporte = "";
+    std::string reporteNotas = "\nLas siguientes son las notas del curso [Curso Progra I] :\n\t\t\t\Examen 1\tExamen 2\tExamen 3\tPromedio";
+    for (int est = 0; est < ESTUDIANTES; est++) {
+        int estudiante = est;
+        reporte = reporte + "\nEstudiante[" + std::to_string(est) + "]\t\t" + std::to_string(calificaciones[est][0]) + "\t\t"
+                + std::to_string(calificaciones[est][1]) + "\t\t" + std::to_string(calificaciones[est][2]) + "\t\t"
+                + std::to_string(ObtenerPromedio(est, 3)) + "\t\t";
+    }
+    return reporteNotas + reporte;
 }
 
 const std::string LibroCalificaciones::obtenerReporteNotasMaxMin() {
-	return std::string();
+    std::string reporte = "";
+
+    reporte = "\nLa nota minima es: [" + std::to_string(obtenerNotaMinima()) + "]\n";
+    reporte += "La nota maxima es: [" + std::to_string(obtenerNotaMaxima()) + "]\n";
+
+    return reporte;
 }
 
-std::string LibroCalificaciones::getNombreCurso() {
-	return std::string();
+const std::string LibroCalificaciones::getNombreCurso() {
+    return nombreCurso;
 }
 
 void LibroCalificaciones::setNombreCurso(const std::string& nombreCurso) {
+    LibroCalificaciones::nombreCurso = nombreCurso;
 }

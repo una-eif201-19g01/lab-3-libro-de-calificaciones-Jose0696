@@ -10,15 +10,15 @@ class LibroCalificaciones {
 	int calificaciones[ESTUDIANTES][EXAMENES];
 	int obtenerNotaMinima();
 	int obtenerNotaMaxima();
-	double ObtenerPromedio(const int[], const int);
+	double ObtenerPromedio(const int, const int);
 
 public:
 	LibroCalificaciones();
-	LibroCalificaciones(const std::string& nombreCurso, int[][EXAMENES]);
+	LibroCalificaciones(const std::string& nombreCurso, int[ESTUDIANTES][EXAMENES]);
 	std::string obtenerReporteNotas();
 
 	const std::string obtenerReporteNotasMaxMin();
-	std::string getNombreCurso();
+	const std::string getNombreCurso();
 	void setNombreCurso(const std::string& nombreCurso);
 
 };
