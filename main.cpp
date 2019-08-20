@@ -1,6 +1,7 @@
 #include <iostream>
 #include "LibroCalificaciones.h"
 
+using namespace std;
 int main() {
 	static const int ESTUDIANTES = 10;
 	static const int EXAMENES = 3;
@@ -11,6 +12,6 @@ int main() {
 	};
 	LibroCalificaciones libro("Curso Progra I", listaCalificaciones);
 
-	std::cout << libro.obtenerReporteNotas() << std::endl;
-	std::cout << libro.obtenerReporteNotasMaxMin() << std::endl;
+	cout << libro.obtenerReporteNotas() << endl;
+	cout << libro.obtenerReporteNotasMaxMin() << endl;
 }

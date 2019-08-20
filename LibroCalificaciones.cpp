@@ -54,15 +54,13 @@ double LibroCalificaciones::ObtenerPromedio(const int est, const int examen) {
 }
 
 std::string LibroCalificaciones::obtenerReporteNotas() {
-    std::string reporte = "";
     std::string reporteNotas = "\nLas siguientes son las notas del curso [Curso Progra I] :\n\t\t\t\Examen 1\tExamen 2\tExamen 3\tPromedio";
     for (int est = 0; est < ESTUDIANTES; est++) {
-        int estudiante = est;
-        reporte = reporte + "\nEstudiante[" + std::to_string(est) + "]\t\t" + std::to_string(calificaciones[est][0]) + "\t\t"
+        reporteNotas = reporteNotas + "\nEstudiante[" + std::to_string(est) + "]\t\t" + std::to_string(calificaciones[est][0]) + "\t\t"
                 + std::to_string(calificaciones[est][1]) + "\t\t" + std::to_string(calificaciones[est][2]) + "\t\t"
                 + std::to_string(ObtenerPromedio(est, 3)) + "\t\t";
     }
-    return reporteNotas + reporte;
+    return reporteNotas;
 }
 
 const std::string LibroCalificaciones::obtenerReporteNotasMaxMin() {
